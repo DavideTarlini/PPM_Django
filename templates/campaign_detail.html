@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %} Details {% endblock %}
+
+{% block customstyle %}   
+{% endblock %}
+
+{% block content %}
+
+<section class="container-fluid">
+    <div class="row mt-3 mb-3">
+        <div class="col-4">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <img src="{{ campaign.image_url }}" class="card-img img-max" alt="{{ campaign.title }}">
+                    <div class="card-body">
+                      <p class="card-text">{{ campaign.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <h2>{{ campaign.title }}</h2>
+            <p>{{ campaign.description }}</p>
+            <p>Goal Amount: {{ campaign.goal_amount }}</p>
+            <p>Start Date: {{ campaign.start_date }}</p>
+            <p>End Date: {{ campaign.end_date }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h3><strong>REWARDS</strong></h3>
+            <ul class="list-group">
+                {% for reward in campaign.reward_set.all %}
+                    <li class="list-group-item">
+                        <div class="card-body">
+                            <h4 class="card-title mb-2">{{ reward.title }}</h6>
+                            <p class="card-text">{{ reward.description }}</p>
+                            <p class="card-text">Minimum Pledge: {{ reward.minimum_pledge }}</p>
+                            <p class="card-text">Estimated Delivery: {{ reward.estimated_delivery }}</p>
+                        </div>
+                    </li>              
+                {% endfor %}
+            </ul>
+        </div>
+    </div> 
+
+    <div class="row mt-5">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h3><strong>COMMENTS</strong></h3>
+            {% for comment in campaign.comment_set.all %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ comment.user.username }}</h6>
+                        <p class="card-text">{{ comment.content }}</p>
+                        <small class="text-muted">{{ comment.timestamp }}</small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

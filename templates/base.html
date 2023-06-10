@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <style>
+        .header {
+            background-color: #f7f7f7;
+        }            
+
+        .header-content {
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: #000;
+        }
+
+        a { color:black; text-decoration: none; }
+    </style>
+
+    {% block customstyle %}
+    {% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="header-content d-flex">
+                <div class="col-3">
+                    <nav>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Create a campaign</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Search</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-6 logo d-flex justify-content-center"> 
+                    <a href="{% url 'landing-page' %}">My Website </a>
+                </div>
+                <div class="col-3 d-flex justify-content-end">
+                    <nav>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Login</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="bg-light py-3 text-center">
+        <p>&copy; MyWebsite</p>
+    </footer>
+</body>
+</html>
+

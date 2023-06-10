@@ -1,0 +1,104 @@
+[
+    {
+      "model": "mainapp.campaigncategory",
+      "pk": 1,
+      "fields": {
+        "name": "Technology",
+        "slug": "technology"
+      }
+    },
+    {
+      "model": "mainapp.campaigncategory",
+      "pk": 2,
+      "fields": {
+        "name": "Art",
+        "slug": "art"
+      }
+    },
+    {
+      "model": "mainapp.campaign",
+      "pk": 1,
+      "fields": {
+        "title": "Campaign 1",
+        "description": "Campaign 1 description",
+        "image_url": "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg",
+        "goal_amount": 10000,
+        "current_amount": 0,
+        "start_date": "2023-06-01",
+        "end_date": "2023-06-30",
+        "owner": 1,
+        "category": 1,
+        "created_at": "2023-06-01T10:00:00Z",
+        "updated_at": "2023-06-01T12:00:00Z"
+      }
+    },
+    {
+      "model": "mainapp.campaign",
+      "pk": 2,
+      "fields": {
+        "title": "Campaign 2",
+        "description": "Campaign 2 description",
+        "image_url": "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg",
+        "goal_amount": 5000,
+        "current_amount": 0,
+        "start_date": "2023-07-01",
+        "end_date": "2023-07-31",
+        "owner": 1,
+        "category": 2,
+        "created_at": "2023-07-01T10:00:00Z",
+        "updated_at": "2023-07-01T12:00:00Z"
+      }
+    },
+    {
+      "model": "mainapp.reward",
+      "pk": 1,
+      "fields": {
+        "campaign": 1,
+        "title": "Reward 1",
+        "description": "Reward 1 description",
+        "minimum_pledge": 100,
+        "estimated_delivery": "2023-08-31"
+      }
+    },
+    {
+      "model": "mainapp.reward",
+      "pk": 2,
+      "fields": {
+        "campaign": 1,
+        "title": "Reward 2",
+        "description": "Reward 2 description",
+        "minimum_pledge": 200,
+        "estimated_delivery": "2023-09-30"
+      }
+    },
+    {
+      "model": "mainapp.comment",
+      "pk": 1,
+      "fields": {
+        "user": 1,
+        "campaign": 1,
+        "content": "Comment 1 content",
+        "timestamp": "2023-06-01T10:00:00Z"
+      }
+    },
+    {
+      "model": "mainapp.comment",
+      "pk": 2,
+      "fields": {
+        "user": 1,
+        "campaign": 2,
+        "content": "Comment 2 content",
+        "timestamp": "2023-07-01T10:00:00Z"
+      }
+    },
+    {
+      "model": "mainapp.updatenotify",
+      "pk": 1,
+      "fields": {
+        "campaign": 1,
+        "title": "Update",
+        "content": "update content",
+        "timestamp":"2023-06-01T10:00:00Z"
+        }
+    }
+]

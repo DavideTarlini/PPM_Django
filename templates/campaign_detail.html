@@ -21,10 +21,15 @@
         </div>
         <div class="col-8">
             <h2>{{ campaign.title }}</h2>
-            <p>{{ campaign.description }}</p>
+            <p>Owner: {{ campaign.owner }}</p>
+            <p>Description: {{ campaign.description }}</p>
             <p>Goal Amount: {{ campaign.goal_amount }}</p>
+            <p>Current Amount: {{ campaign.current_amount }}</p>
             <p>Start Date: {{ campaign.start_date }}</p>
             <p>End Date: {{ campaign.end_date }}</p>
+        </div>
+        <div class="col-2">
+            <a href="{% url 'contribute' campaign.id %}" class="btn btn-primary">Contribute</a>
         </div>
     </div>
 
@@ -48,7 +53,9 @@
     </div> 
 
     <div class="row mt-5">
-        <div class="col-2"></div>
+        <div class="col-2">
+            <a href="{% url 'add-comment' campaign.id %}" class="btn btn-primary">Add Comment</a>
+        </div>
         <div class="col-8">
             <h3><strong>COMMENTS</strong></h3>
             {% for comment in campaign.comment_set.all %}

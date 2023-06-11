@@ -8,6 +8,7 @@ from django.db.models import F
 from mainapp.forms import CampaignCreationForm, CommentCreationForm, ContributionForm
 from mainapp.models import Campaign, Reward, Comment, Contribution, CampaignCategory
 
+
 class LandingPageView(ListView):
     template_name = "landing_page.html"
     model = Campaign

@@ -1,23 +1,34 @@
 from django.urls import reverse_lazy
-from django.views.generic.list import ListView
 from django.views.generic import DetailView, FormView, CreateView, TemplateView
+from django.views.generic.list import ListView
 from django.views.generic.edit import ModelFormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models import F
 from mainapp.forms import CampaignCreationForm, CommentCreationForm, ContributionForm
-from mainapp.models import Campaign, Reward, Comment, Contribution
+from mainapp.models import Campaign, Reward, Comment, Contribution, CampaignCategory
 
 
 class LandingPageView(ListView):
     template_name = "landing_page.html"
     model = Campaign
-    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = CampaignCategory.objects.all() 
+        return context
     
 
-class SignUpView(FormView):
-    template_name = "post_form.html"
-    form_class = UserCreationForm
-    success_url = reverse_lazy("login")
+class LandingPageFilteredView(ListView):
+    template_name = "landing_page.html"
+    model = Campaign
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = CampaignCategory.objects.all()
+        if self.kwargs["pk"] != None:
+            context["object_list"] = Campaign.objects.filter(category=self.kwargs["pk"]) 
+        return context
 
 
 class CampaignDetailsView(DetailView):
@@ -37,7 +48,6 @@ class ContributeView(LoginRequiredMixin, CreateView):
     template_name = "post_form.html"
     model = Contribution
     form_class = ContributionForm
-    success_url = reverse_lazy("landing-page")
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -45,10 +55,13 @@ class ContributeView(LoginRequiredMixin, CreateView):
         self.object.campaign = Campaign.objects.get(id=self.kwargs["camp_pk"])
         self.object.save()
 
-        Campaign.objects.filter(id=self.kwargs["camp_pk"]).update(current_amount = (self.object.amount+self.object.campaign.current_amount))
- 
+        campaign = Campaign.objects.filter(id=self.kwargs["camp_pk"])
+        campaign.update(current_amount=F('current_amount') + self.object.amount)
 
         return super(ModelFormMixin, self).form_valid(form)
+
+    def get_success_url(self):
+          return reverse_lazy('campaign-details', kwargs={'pk': self.kwargs['camp_pk']})
 
 
 class AddCommentView(LoginRequiredMixin, CreateView):
@@ -56,7 +69,6 @@ class AddCommentView(LoginRequiredMixin, CreateView):
     template_name = "post_form.html"
     model = Comment
     form_class = CommentCreationForm
-    success_url = reverse_lazy("landing-page")
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -65,19 +77,32 @@ class AddCommentView(LoginRequiredMixin, CreateView):
         self.object.save()
         return super(ModelFormMixin, self).form_valid(form)
     
+    def get_success_url(self):
+          return reverse_lazy('campaign-details', kwargs={'pk': self.kwargs['camp_pk']})
+    
 
 class CreateCampaignView(LoginRequiredMixin, CreateView):
     login_url = 'login'
     template_name = "post_form.html"
     model = Campaign
     form_class = CampaignCreationForm
-    success_url = reverse_lazy("landing-page")
+    new_id = None
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.owner = self.request.user
         self.object.save()
+        self.new_id = self.object.id
         return super(ModelFormMixin, self).form_valid(form)
+    
+    def get_success_url(self):
+          return reverse_lazy('campaign-details', kwargs={'pk': self.new_id})
+    
+
+class SignUpView(FormView):
+    template_name = "post_form.html"
+    form_class = UserCreationForm
+    success_url = reverse_lazy("login")
     
 
 class AccountView(LoginRequiredMixin, TemplateView):

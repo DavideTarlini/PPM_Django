@@ -83,6 +83,16 @@
     },
     {
       "model": "mainapp.comment",
+      "pk": 1,
+      "fields": {
+        "user": 1,
+        "campaign": 1,
+        "content": "Comment 2 content",
+        "timestamp": "2023-06-01T10:00:00Z"
+      }
+    },
+    {
+      "model": "mainapp.comment",
       "pk": 2,
       "fields": {
         "user": 1,
@@ -90,15 +100,5 @@
         "content": "Comment 2 content",
         "timestamp": "2023-07-01T10:00:00Z"
       }
-    },
-    {
-      "model": "mainapp.updatenotify",
-      "pk": 1,
-      "fields": {
-        "campaign": 1,
-        "title": "Update",
-        "content": "update content",
-        "timestamp":"2023-06-01T10:00:00Z"
-        }
     }
 ]

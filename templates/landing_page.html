@@ -5,19 +5,27 @@
 
 
 {% block customstyle %}
-    <style>
+  <style>
       .img-max {
         max-width: 250px;
         width:100%;
       }
-    </style>
+
+    h1 {
+      text-align: center;
+    }
+  </style>
 {% endblock %}
 
 
 {% block content %}
 <div class="container">
     <h1>Crowdfunding Campaigns</h1>
-    
+    <div class="row m-5">
+      {% for category in categories %}
+            <a class="btn btn-primary" href="{% url 'landing-page-filtered' category.id %}">{{category.name}}</a>
+      {% endfor %}
+    </div>
     {% for campaign in object_list %}
       <div class="card mb-3">
         <div class="row no-gutters">

@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.models import User
 
 
@@ -63,20 +60,6 @@ class Comment(models.Model):
         return f"Comment by {self.user.username} on {self.campaign.title}"
 
 
-#Update message made by the owner of a campaign and broadcasted to all backers of such campaign
-class UpdateNotify(models.Model):
-    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        db_table = "UpdateNotify"
-
-    def __str__(self):
-        return self.title
-
-#A single contribution to a campaign
 class Contribution(models.Model):
     backer = models.ForeignKey(User, on_delete=models.CASCADE)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)

@@ -2,7 +2,12 @@
 
 {% block title %} Details {% endblock %}
 
-{% block customstyle %}   
+{% block customstyle %} 
+<style>
+    h3 {
+      text-align: center;
+    }
+</style>    
 {% endblock %}
 
 {% block content %}
@@ -23,8 +28,8 @@
             <h2>{{ campaign.title }}</h2>
             <p>Owner: {{ campaign.owner }}</p>
             <p>Description: {{ campaign.description }}</p>
-            <p>Goal Amount: {{ campaign.goal_amount }}</p>
-            <p>Current Amount: {{ campaign.current_amount }}</p>
+            <p>Goal Amount: ${{ campaign.goal_amount }}</p>
+            <p>Current Amount: ${{ campaign.current_amount }}</p>
             <p>Start Date: {{ campaign.start_date }}</p>
             <p>End Date: {{ campaign.end_date }}</p>
         </div>
@@ -43,7 +48,7 @@
                         <div class="card-body">
                             <h4 class="card-title mb-2">{{ reward.title }}</h6>
                             <p class="card-text">{{ reward.description }}</p>
-                            <p class="card-text">Minimum Pledge: {{ reward.minimum_pledge }}</p>
+                            <p class="card-text">Minimum Pledge: ${{ reward.minimum_pledge }}</p>
                             <p class="card-text">Estimated Delivery: {{ reward.estimated_delivery }}</p>
                         </div>
                     </li>              

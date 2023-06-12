@@ -33,17 +33,14 @@
             <div class="header-content d-flex">
                 <div class="col-3">
                     <nav>
-                        <ul class="nav">
-                            {% if request.user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'create-campaign' %}">Create a campaign</a>
-                            </li>
-                            {% endif %}
-                        </ul>
+                        <form class="d-flex" action="{% url 'search' %}" method="get">
+                            <input class="form-control me-2" name="s" placeholder="Campaign name or descritpion" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                          </form>
                     </nav>
                 </div>
                 <div class="col-6 logo d-flex justify-content-center"> 
-                    <a href="{% url 'landing-page' %}">My Website </a>
+                    <a href="{% url 'landing-page' %}"> RealWebsite </a>
                 </div>
                 <div class="col-3 d-flex justify-content-end">
                     <nav>
@@ -57,6 +54,9 @@
                             </li>
                             {% endif %}
                             {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'create-campaign' %}">Create a campaign</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                             </li>
@@ -75,7 +75,7 @@
     {% endblock %}
 
     <footer class="bg-light py-3 text-center">
-        <p>&copy; MyWebsite</p>
+        <p>&copy; RealWebsite </p>
     </footer>
 </body>
 </html>

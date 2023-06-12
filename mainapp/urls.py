@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth
 urlpatterns = [
     path("", LandingPageView.as_view(), name="landing-page"),
     path("filtered/<int:pk>", LandingPageFilteredView.as_view(), name="landing-page-filtered"),
+    path("search/", SearchResultView.as_view(), name="search"),
     path("details/<int:pk>", CampaignDetailsView.as_view(), name="campaign-details"),
     path("add comment:<int:camp_pk>", AddCommentView.as_view(), name="add-comment"),
     path("contribute:<int:camp_pk>", ContributeView.as_view(), name="contribute"),

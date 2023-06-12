@@ -5,6 +5,7 @@ from django.views.generic.edit import ModelFormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import F
+from django.db.models import Q
 from mainapp.forms import CampaignCreationForm, CommentCreationForm, ContributionForm
 from mainapp.models import Campaign, Reward, Comment, Contribution, CampaignCategory
 
@@ -19,16 +20,15 @@ class LandingPageView(ListView):
         return context
     
 
-class LandingPageFilteredView(ListView):
-    template_name = "landing_page.html"
-    model = Campaign
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["categories"] = CampaignCategory.objects.all()
-        if self.kwargs["pk"] != None:
-            context["object_list"] = Campaign.objects.filter(category=self.kwargs["pk"]) 
-        return context
+class LandingPageFilteredView(LandingPageView):    
+    def get_queryset(self):
+        return Campaign.objects.filter(category=self.kwargs["pk"]) 
+
+
+class SearchResultView(LandingPageView):
+    def get_queryset(self):
+        query = self.request.GET.get("s")
+        return Campaign.objects.filter( Q(title__icontains=query) )
 
 
 class CampaignDetailsView(DetailView):

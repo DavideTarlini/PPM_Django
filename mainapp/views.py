@@ -28,7 +28,7 @@ class LandingPageFilteredView(LandingPageView):
 class SearchResultView(LandingPageView):
     def get_queryset(self):
         query = self.request.GET.get("s")
-        return Campaign.objects.filter( Q(title__icontains=query) )
+        return Campaign.objects.filter( Q(title__icontains=query) | Q(description__icontains=query) )
 
 
 class CampaignDetailsView(DetailView):

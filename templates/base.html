@@ -34,13 +34,13 @@
                 <div class="col-3">
                     <nav>
                         <form class="d-flex" action="{% url 'search' %}" method="get">
-                            <input class="form-control me-2" name="s" placeholder="Search by campaign name..." aria-label="Search">
+                            <input class="form-control me-2" name="s" placeholder="Campaign name or descritpion" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                           </form>
                     </nav>
                 </div>
                 <div class="col-6 logo d-flex justify-content-center"> 
-                    <a href="{% url 'landing-page' %}">My Website </a>
+                    <a href="{% url 'landing-page' %}"> RealWebsite </a>
                 </div>
                 <div class="col-3 d-flex justify-content-end">
                     <nav>
@@ -70,12 +70,12 @@
             </div>
         </div>
     </header>
-    
+
     {% block content %}
     {% endblock %}
 
     <footer class="bg-light py-3 text-center">
-        <p>&copy; MyWebsite</p>
+        <p>&copy; RealWebsite </p>
     </footer>
 </body>
 </html>
